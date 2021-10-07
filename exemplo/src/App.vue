@@ -8,6 +8,7 @@
 html, body {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 html {
@@ -34,5 +35,7 @@ html {
 #nav a.router-link-exact-active {
     color: #42b983;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 
 </style>
