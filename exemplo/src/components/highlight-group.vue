@@ -1,10 +1,19 @@
 <template>
-    <div class="highlight-group" style = "max-width: 170px">
+    <div class="highlight-group">
         <Card color="#F0245E">
-            <highlight-task slot="content" label= 1 name="Tarefa a fazer" />
+            <highlight-task slot="content" :label= 1 name="Tarefa a fazer" />
         </Card>
         <Card color="#985EFF">
-            <highlight-task slot="content" label= 5 name="Tarefas concluídas" />
+            <highlight-task slot="content" :label= 5 name="Tarefas concluídas" />
+        </Card>
+        <Card color="#985EFF">
+            <highlight-task slot="content" :label= 3 name="Tarefas concluídas" />
+        </Card>
+        <Card color="#985EFF">
+            <highlight-task slot="content" :label= 14 name="Tarefas concluídas" />
+        </Card>
+        <Card color="#985EFF">
+            <highlight-task slot="content" :label= 14 name="Tarefas concluídas" />
         </Card>
     </div>
 </template>
@@ -25,5 +34,13 @@
     .highlight-group{
         display: flex;
         flex-direction: row;
+        overflow-x: scroll;
+    }
+
+    @media screen and (max-width: 375px) {
+        .highlight-group{
+            max-width: 375px;
+
+        }
     }
 </style>

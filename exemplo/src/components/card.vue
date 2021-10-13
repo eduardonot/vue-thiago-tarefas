@@ -1,6 +1,6 @@
 <template>
     <div class="card" :style="[{ 'backgroundColor': color }]">
-        <slot name = "content"/>
+        <slot name="content"/>
     </div>
 </template>
 <script>
@@ -23,6 +23,8 @@
         padding: 10px;
         border-radius: 10px;
         min-width: 150px;
-        margin: 5px 0px 5px 5px;
+        margin: 2px 5px 2px 5px;
     }
+
+    
 </style>

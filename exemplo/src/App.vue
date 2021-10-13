@@ -8,11 +8,16 @@
 html, body {
     margin: 0;
     padding: 0;
+    height:100%;
     font-family: 'Roboto', sans-serif;
 }
 
 html {
     height: 100%;
+}
+
+.container{
+    height:100%;
 }
 
 #app {
