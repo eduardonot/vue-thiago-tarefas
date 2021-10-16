@@ -1,9 +1,8 @@
 <template>
     <div class="task-list-group-container">
-        <h1>Hoje</h1>
+        <h1>{{ getTasks.title }}</h1>
         <div class="task-list">
-            <TaskListItem :task="task" v-for="task in getTasks" :key="task.index"/>
-            
+            <TaskListItem :task="task" v-for="task in getTasks.list" :key="task.index"/>
         </div>
     </div>
 </template>
@@ -13,22 +12,19 @@
         name: 'TaskListGroup',
         data (){
             return {
-                
             }
+        },
+        created() {
+            this.$store.commit('setFilter')
         },
         components: {
             TaskListItem
         },
-        methods:{
-
-        },
         computed:{
             getTasks: function(){
-                return this.$store.getters.getAll
+                return this.$store.getters.getFilteredTasks
             }
         },
-        props: {
-        }
     }
 </script>
 <style>

@@ -10,6 +10,7 @@ html, body {
     padding: 0;
     height:100%;
     font-family: 'Roboto', sans-serif;
+    background-color: black;
 }
 
 html {

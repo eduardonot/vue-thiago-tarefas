@@ -1,20 +1,30 @@
 <template>
     <div class="highlight-group">
-        <Card color="#F0245E">
-            <highlight-task slot="content" :label= 1 name="Tarefa a fazer" />
-        </Card>
-        <Card color="#985EFF">
-            <highlight-task slot="content" :label= 5 name="Tarefas concluídas" />
-        </Card>
-        <Card color="#985EFF">
-            <highlight-task slot="content" :label= 3 name="Tarefas concluídas" />
-        </Card>
-        <Card color="#985EFF">
-            <highlight-task slot="content" :label= 14 name="Tarefas concluídas" />
-        </Card>
-        <Card color="#985EFF">
-            <highlight-task slot="content" :label= 14 name="Tarefas concluídas" />
-        </Card>
+        <div @click="allTasks" class="card-handler">
+            <Card color="#F0245E">
+                <highlight-task slot="content" :label="this.$store.getters.getAll.length" name="Todas as Tarefas" />
+            </Card>
+        </div>
+        <div @click="todayTasks" class="card-handler">
+            <Card color="#29B6F6">
+                <highlight-task slot="content" :label="this.$store.getters.getToday.length" name="Tarefas de Hoje" />
+            </Card>
+        </div>
+        <div @click="doneTasks" class="card-handler">
+            <Card color="#9CCC65">
+                <highlight-task slot="content" :label="this.$store.getters.getDone.length" name="Concluídas" />
+            </Card>
+        </div>
+        <div @click="undoneTasks" class="card-handler">
+            <Card color="#E53935">
+                <highlight-task slot="content" :label="this.$store.getters.getUndone.length" name="Não Concluídas" />
+            </Card>
+        </div>
+        <div @click="favoriteTasks" class="card-handler">
+            <Card color="#F9A825">
+                <highlight-task slot="content" :label="this.$store.getters.getFavorite.length" name="Favoritas" />
+            </Card>
+        </div>
     </div>
 </template>
 
@@ -26,6 +36,24 @@
         components:{
             HighlightTask, 
             Card
+        },
+        methods:{
+            allTasks: function(){
+                this.$store.commit('setFilter', 'setAllTasks')
+            },
+            todayTasks: function(){
+                this.$store.commit('setFilter', 'setTodayTasks')
+            },
+            doneTasks: function(){
+                this.$store.commit('setFilter', 'setDoneTasks')
+            },
+            undoneTasks: function(){
+                this.$store.commit('setFilter', 'setUndoneTasks')
+            },
+            favoriteTasks: function(){
+                this.$store.commit('setFilter', 'setFavoriteTasks')
+            },
+
         }
     }
 </script>
@@ -35,6 +63,11 @@
         display: flex;
         flex-direction: row;
         overflow-x: scroll;
+    }
+
+    .card-handler{
+        display: flex;
+        height: auto;
     }
 
     @media screen and (max-width: 375px) {
