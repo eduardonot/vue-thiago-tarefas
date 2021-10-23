@@ -1,36 +1,51 @@
 <template>
     <div class="input-container">
-        <input type="text" placeholder="PESQUISAR"/>
+        <icon-circle class="input-icon" color="rgba(255, 255, 255, 0.7)" icon="search"/>
+        <input class="input-box" type="text" placeholder="PESQUISAR"/>
     </div>
 </template>
 
 <script>
-    export default {
+import iconCircle from './icon-circle.vue'
+export default {    
+    components: { iconCircle },
         name: 'Input',
-    }
+}
 </script>
 
 <style>
     .input-container{
-        position:relative;
         display: flex;
-        margin:5px;
-    }
-
-    .input-container > input {
-        background-image: url("https://cdn-icons-png.flaticon.com/128/482/482631.png");
-        background-repeat: no-repeat;
-        background-size:17px;
-        background-position-y: 50%;
-        background-position-x: 98%;
-        border-radius: 50px;
-        width: 100%;
+        flex-direction:column;
+        justify-content:center;
+        align-items: center;
         padding: 5px 15px 5px 15px;
     }
 
-    .input-container > input:focus {
+    .input-box {
+        width: 100%;
+        height: 30px;
+        border-radius: 100px;
+        border: none;
+        padding: 5px 15px 5px 15px;
+        background-color: rgba(255, 255, 255, 0.2);
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 16px
+    }
+
+    .input-box:focus {
         outline: none;
     }
 
+    .input-box::placeholder{
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .input-icon{
+        position: absolute;
+        z-index: 5;
+        right: 15px;
+    }
 
 </style>

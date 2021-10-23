@@ -10,7 +10,7 @@ export default new Vuex.Store({
         tasks:[
             {
                 title: 'Primeira Tarefa',
-                date: new Date('10/12/2021'),
+                date: new Date('10/20/2021'),
                 tags: ['Namorada'],
                 icon: 'favorite_border',
                 isDone: false,

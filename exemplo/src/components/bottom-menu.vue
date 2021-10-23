@@ -1,35 +1,28 @@
 <template>
     <div class="bottom-menu-container">
-        <div class="icon-list">
-            <IconCircle icon="list" />
-            <IconCircle icon="done_all" />
-            <IconCircle icon="favorite_border" />
-            <IconCircle icon="account_circle" />
-        </div>
+        <NavbarItem icon="list" name="dashboard"/>
+        <NavbarItem icon="done_all" name="task-done"/>
+        <NavbarItem icon="favorite_border" name="favorites"/>
+        <NavbarItem icon="account_circle" name="profiles"/>
     </div>
 </template>
 <script>
-    import IconCircle from './icon-circle.vue'
+    import NavbarItem from './navbar-item.vue'
     export default {
         name: 'BottomMenu',
-        components: {IconCircle}
+        components: {NavbarItem},
     }
 </script>
 <style>
     .bottom-menu-container{
         display:flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-around;
         position: fixed;
         bottom: 0;
         left: 0;
         z-index: 10;
         width: 100%;
         background-color:black;
-    }
-
-    .icon-list{
-        display: flex;
-        flex-direction: row;
-        justify-content:space-around;
     }
 </style>
