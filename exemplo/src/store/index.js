@@ -74,7 +74,7 @@ export default new Vuex.Store({
                     state.filteredTasks = searchUndone
                     break
                 case 'setFavoriteTasks':
-                    state.filteredTasksTitle = 'Favoritas'
+                    state.filteredTasksTitle = 'Favoritos'
                     state.filteredTasks = searchFavorite
                     break
                 default:

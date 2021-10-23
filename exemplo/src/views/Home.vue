@@ -7,7 +7,8 @@
 <script>
     export default {
         name: 'Home',
-        components: {
+        created() {
+            this.$store.commit('setFilter')
         },
     }
 </script>

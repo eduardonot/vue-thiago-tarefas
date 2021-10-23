@@ -14,9 +14,6 @@
             return {
             }
         },
-        created() {
-            this.$store.commit('setFilter')
-        },
         components: {
             TaskListItem
         },
