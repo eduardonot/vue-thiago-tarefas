@@ -1,16 +1,19 @@
 <template>
     <div class="bottom-menu-container">
         <div @click="allTasks"> 
-            <NavbarItem  icon="list" name="dashboard"/>
+            <NavbarItem  icon="list" name="/dashboard"/>
         </div>
         <div @click="doneTasks">
-            <NavbarItem  icon="done_all" name="task-done"/>
-        </div>
-        <div @click="favoriteTasks">
-            <NavbarItem  icon="favorite_border" name="favorites"/>
+            <NavbarItem  icon="done_all" name="/task-done"/>
         </div>
         <div>
-            <NavbarItem icon="account_circle" name="profiles"/>
+            <NavbarItem  icon="add" name="/task-form"/>
+        </div>
+        <div @click="favoriteTasks">
+            <NavbarItem  icon="favorite_border" name="/favorites"/>
+        </div>
+        <div>
+            <NavbarItem icon="account_circle" name="/profiles"/>
         </div>
     </div>
 </template>

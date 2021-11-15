@@ -3,7 +3,7 @@
         <Card color="#262626">
             <div slot="content" class="task-content">
                 <IconCircle bgcolor="rgba(255, 255, 255, 0.1)" color="rgba(255, 255, 255, 0.7)" size="40px" :icon="task.icon"/>
-                <TaskItem :title="task.title" :date="task.date" :label="task.tags" />
+                <TaskItem :title="task.title" :date="task.date" :label="task.tags" :item="task" />
                 <div class="fav-icon">
                     <FavoriteIcon :favorite="task.favorite"/>
                 </div>

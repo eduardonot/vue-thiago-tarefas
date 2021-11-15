@@ -1,11 +1,11 @@
 <template>
-    <div class="task-item-container">
-        <h1>{{ title }}</h1>
-        <p>{{ date.toLocaleDateString() }}</p>
+    <router-link :to="/task-form/+item.id" class="task-item-container">
+        <h1>{{ item.title }}</h1>
+        <p>{{ item.date }}</p>
         <div class="chip-list">
-            <chip v-for="value in label" :key="value.index" :label=value />
+            <chip v-for="value in item.tags" :key="value.index" :label=value />
         </div>
-    </div>
+    </router-link>
 </template>
 <script>
     import Chip from './chip.vue'
@@ -15,12 +15,16 @@
             Chip
         },
         props:{
+            item:{
+                type: Object,
+                required: true
+            },
             title: {
                 type: String,
                 default: 'Titulo'
             },
             date: {
-                type: Date,
+                type: String,
             },
             label: {
                 type: Array,

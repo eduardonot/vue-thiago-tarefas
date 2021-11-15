@@ -26,6 +26,14 @@ const routes = [
                 component: () => import('./../Pages/task-done')
             },
             {
+                path: 'task-form/:id?',
+                name: 'task-form',
+                meta: {
+                    showName: 'Formulário'
+                },
+                component: () => import('./../Pages/task-form')
+            },
+            {
                 path: 'favorites',
                 name: 'favorites',
                 meta: {

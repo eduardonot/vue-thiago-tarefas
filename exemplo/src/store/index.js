@@ -9,40 +9,45 @@ export default new Vuex.Store({
         filteredTasks:[],
         tasks:[
             {
+                id: 1,
                 title: 'Primeira Tarefa',
-                date: new Date('10/20/2021'),
+                date: '2021-10-20',
                 tags: ['Namorada'],
                 icon: 'favorite_border',
                 isDone: false,
                 favorite: false
             },
             {
+                id: 2,
                 title: 'Segunda Tarefa',
-                date: new Date('12/13/2021'),
+                date: '2021-03-03',
                 tags: ['Compras', 'Importante'],
                 icon: 'shopping_cart',
                 isDone: false,
                 favorite: false
             },
             {
+                id: 3,
                 title: 'Terceira Tarefa',
-                date: new Date('12/12/2021'),
+                date: '2021-05-12',
                 tags: ['Compras', 'Importante'],
                 icon: 'shopping_cart',
                 isDone: true,
                 favorite: true
             },
             {
+                id: 4,
                 title: 'Quarta',
-                date: new Date('10/16/2021'),
+                date: '2021-03-11',
                 tags: ['Compras', 'Importante'],
                 icon: 'shopping_cart',
                 isDone: true,
                 favorite: true
             },
             {
+                id: 5,
                 title: '5ª',
-                date: new Date('12/10/2021'),
+                date: '2021-11-03',
                 tags: ['Compras', 'Importante'],
                 icon: 'shopping_cart',
                 isDone: true,
@@ -52,7 +57,7 @@ export default new Vuex.Store({
     },
     mutations: {
         setFilter: (state, payload) => {
-            const searchToday = state.tasks.filter(x => x.date.toLocaleDateString() === new Date().toLocaleDateString())
+            const searchToday = state.tasks.filter(x => x.date === new Date())
             const searchDone = state.tasks.filter(x => x.isDone === true)
             const searchUndone = state.tasks.filter(x => x.isDone === false)
             const searchFavorite = state.tasks.filter(x => x.favorite === true)
@@ -83,8 +88,21 @@ export default new Vuex.Store({
                     break
             }
         },
+        addTask: (state, payload) => {
+            Object.assign(payload, {id: state.tasks.length + 1})
+            state.tasks.push(payload)
+        },
+        editTask: (state, payload) => {
+            state.tasks[payload.id-1] = payload
+        }
     },
     actions: {
+        addTask (task, payload) {
+            task.commit('addTask', payload)
+        },
+        editTask (task, payload) {
+            task.commit('editTask', payload)
+        }
     },
     getters:{
         getAll: (state) => {
@@ -107,7 +125,7 @@ export default new Vuex.Store({
             return searchTask
         },
         getToday: (state) => {
-            const searchTask = state.tasks.filter(x => x.date.toLocaleDateString() === new Date().toLocaleDateString())
+            const searchTask = state.tasks.filter(x => x.date === new Date())
             return searchTask
         },
         getFilteredTasks: (state) =>{
