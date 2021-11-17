@@ -10,6 +10,10 @@ const routes = [
         component: () => import('./../views/Home'),
         children: [
             {
+                path: '',
+                redirect: 'dashboard'
+            },
+            {
                 path: 'dashboard',
                 name: 'dashboard',
                 meta: {

@@ -1,7 +1,6 @@
 <template>
     <div class="home-container">
         <router-view />
-        <button @click="postTask" >Click</button>
     </div>
 </template>
 
@@ -9,11 +8,12 @@
     export default {
         name: 'Home',
         created() {
+            this.load()
             this.$store.commit('setFilter')
         },
         methods: {
-            postTask () {
-                this.$store.dispatch('postTask')
+            load() {
+                this.$store.dispatch('load')
             }
         },
     }

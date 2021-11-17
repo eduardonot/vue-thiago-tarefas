@@ -52,6 +52,7 @@ export default {
                     icon: this.form.icon,
                     favorite: this.form.favorite
                 })
+        
             // ADICIONAR
             } else {
                 this.$store.dispatch('addTask', {
@@ -70,9 +71,10 @@ export default {
         haveParams () {
             const param = this.$route.params.id
             if(param){
-                const getTask = this.$store.getters['getAll'].find(x => x.id == param)
+                const getTask = this.$store.getters['getAll'].find(x => x._id == param)
                 this.form.title = getTask.title
-                this.form.date = getTask.date
+                this.form.date = new Date(getTask.date)
+                console.log(this.form.date.toLocaleDateString())
                 this.form.icon = getTask.icon
                 this.tags = getTask.tags
                 this.form.favorite = getTask.favorite

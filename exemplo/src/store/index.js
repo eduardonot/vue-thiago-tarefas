@@ -9,58 +9,58 @@ export default new Vuex.Store({
         filteredTasksTitle: '',
         filteredTasks:[],
         tasks:[
-            {
-                id: 1,
-                title: 'Primeira Tarefa',
-                date: '2021-10-20',
-                tags: ['Namorada'],
-                icon: 'favorite_border',
-                isDone: false,
-                favorite: false
-            },
-            {
-                id: 2,
-                title: 'Segunda Tarefa',
-                date: '2021-03-03',
-                tags: ['Compras', 'Importante'],
-                icon: 'shopping_cart',
-                isDone: false,
-                favorite: false
-            },
-            {
-                id: 3,
-                title: 'Terceira Tarefa',
-                date: '2021-05-12',
-                tags: ['Compras', 'Importante'],
-                icon: 'shopping_cart',
-                isDone: true,
-                favorite: true
-            },
-            {
-                id: 4,
-                title: 'Quarta',
-                date: '2021-03-11',
-                tags: ['Compras', 'Importante'],
-                icon: 'shopping_cart',
-                isDone: true,
-                favorite: true
-            },
-            {
-                id: 5,
-                title: '5ª',
-                date: '2021-11-03',
-                tags: ['Compras', 'Importante'],
-                icon: 'shopping_cart',
-                isDone: true,
-                favorite: true
-            },
+            // {
+            //     id: 1,
+            //     title: 'Primeira Tarefa',
+            //     date: '2021-10-20',
+            //     tags: ['Namorada'],
+            //     icon: 'favorite_border',
+            //     status: false,
+            //     favorite: false
+            // },
+            // {
+            //     id: 2,
+            //     title: 'Segunda Tarefa',
+            //     date: '2021-03-03',
+            //     tags: ['Compras', 'Importante'],
+            //     icon: 'shopping_cart',
+            //     status: false,
+            //     favorite: false
+            // },
+            // {
+            //     id: 3,
+            //     title: 'Terceira Tarefa',
+            //     date: '2021-05-12',
+            //     tags: ['Compras', 'Importante'],
+            //     icon: 'shopping_cart',
+            //     status: true,
+            //     favorite: true
+            // },
+            // {
+            //     id: 4,
+            //     title: 'Quarta',
+            //     date: '2021-03-11',
+            //     tags: ['Compras', 'Importante'],
+            //     icon: 'shopping_cart',
+            //     status: true,
+            //     favorite: true
+            // },
+            // {
+            //     id: 5,
+            //     title: '5ª',
+            //     date: '2021-11-03',
+            //     tags: ['Compras', 'Importante'],
+            //     icon: 'shopping_cart',
+            //     status: true,
+            //     favorite: true
+            // },
         ],
     },
     mutations: {
         setFilter: (state, payload) => {
-            const searchToday = state.tasks.filter(x => x.date === new Date())
-            const searchDone = state.tasks.filter(x => x.isDone === true)
-            const searchUndone = state.tasks.filter(x => x.isDone === false)
+            const searchToday = state.tasks.filter(x => x.expectedDate === new Date())
+            const searchDone = state.tasks.filter(x => x.status === true)
+            const searchUndone = state.tasks.filter(x => x.status === false)
             const searchFavorite = state.tasks.filter(x => x.favorite === true)
             switch (payload) {
                 case 'setAllTasks':
@@ -95,18 +95,23 @@ export default new Vuex.Store({
         },
         editTask: (state, payload) => {
             state.tasks[payload.id-1] = payload
+        },
+        setTasks: (state, payload) => {
+            state.tasks = payload
         }
     },
     actions: {
-        addTask (task, payload) {
-            task.commit('addTask', payload)
+        addTask ({dispatch}, payload) {
+            API_SERVICE.post('/task', payload)
+            dispatch('load')
         },
-        editTask (task, payload) {
-            task.commit('editTask', payload)
+        editTask ({dispatch}, data) {
+            API_SERVICE.put(`/task/${data.id}`, data)
+            dispatch('load')
         },
-        postTask() {
-            const request = API_SERVICE.get('/task')
-            console.log(request)
+        load({ commit }) {
+            API_SERVICE.get('/task')
+                .then(response => commit('setTasks', response.data))
         }
     },
     getters:{
@@ -114,11 +119,11 @@ export default new Vuex.Store({
             return state.tasks
         },
         getDone: (state) => {
-            const searchTask = state.tasks.filter(x => x.isDone === true)
+            const searchTask = state.tasks.filter(x => x.status === true)
             return searchTask
         },
         getUndone: (state) => {
-            const searchTask = state.tasks.filter(x => x.isDone === false)
+            const searchTask = state.tasks.filter(x => x.status === false)
             return searchTask
         },
         getFavorite: (state) => {
@@ -130,7 +135,7 @@ export default new Vuex.Store({
             return searchTask
         },
         getToday: (state) => {
-            const searchTask = state.tasks.filter(x => x.date === new Date())
+            const searchTask = state.tasks.filter(x => x.expectedDate === new Date())
             return searchTask
         },
         getFilteredTasks: (state) =>{
