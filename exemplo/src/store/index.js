@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {API_SERVICE} from './../plugins/api'
 
 Vue.use(Vuex)
 
@@ -102,6 +103,10 @@ export default new Vuex.Store({
         },
         editTask (task, payload) {
             task.commit('editTask', payload)
+        },
+        postTask() {
+            const request = API_SERVICE.get('/task')
+            console.log(request)
         }
     },
     getters:{
