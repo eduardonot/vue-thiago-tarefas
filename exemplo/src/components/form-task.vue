@@ -27,8 +27,8 @@ export default {
     },
     methods: {
         addTask (){
-            // const refactDate = this.form.date.split('-')
-            // const taskDate = new Date(`${refactDate[1]}-${refactDate[2]}-${refactDate[0]}`)
+            const refactDate = this.form.date.split('-')
+            const taskDate = `${refactDate[1]}/${refactDate[2]}/${refactDate[0]}`
             let taskTags = new Array
             this.tags = this.tags.toString()
             const setFormArrays = this.tags.split(',')
@@ -47,7 +47,7 @@ export default {
                 this.$store.dispatch('editTask', {
                     id: this.$route.params.id,
                     title: this.form.title,
-                    date: this.form.date,
+                    date: taskDate,
                     tags: taskTags,
                     icon: this.form.icon,
                     favorite: this.form.favorite
@@ -57,13 +57,14 @@ export default {
             } else {
                 this.$store.dispatch('addTask', {
                     title: this.form.title,
-                    date: this.form.date,
+                    date: taskDate,
                     tags: taskTags,
                     icon: this.form.icon,
                     favorite: this.form.favorite
                 })
             }
             this.clearForm()
+            this.$store.dispatch('load')
         },
         trueDate (valor) {
             return Date(valor)

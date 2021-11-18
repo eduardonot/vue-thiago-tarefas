@@ -9,7 +9,6 @@
         name: 'Home',
         created() {
             this.load()
-            this.$store.commit('setFilter')
         },
         methods: {
             load() {

@@ -58,7 +58,9 @@ export default new Vuex.Store({
     },
     mutations: {
         setFilter: (state, payload) => {
-            const searchToday = state.tasks.filter(x => x.expectedDate === new Date())
+            const today = new Date().toLocaleDateString().split('/')
+            const formatedDay = `${today[1]}/${today[0]}/${today[2]}`
+            const searchToday = state.tasks.filter(x => x.date === formatedDay)
             const searchDone = state.tasks.filter(x => x.status === true)
             const searchUndone = state.tasks.filter(x => x.status === false)
             const searchFavorite = state.tasks.filter(x => x.favorite === true)
@@ -112,6 +114,8 @@ export default new Vuex.Store({
         load({ commit }) {
             API_SERVICE.get('/task')
                 .then(response => commit('setTasks', response.data))
+                .then(() => commit('setFilter', 'setAllTasks'))
+            
         }
     },
     getters:{
@@ -135,7 +139,9 @@ export default new Vuex.Store({
             return searchTask
         },
         getToday: (state) => {
-            const searchTask = state.tasks.filter(x => x.expectedDate === new Date())
+            const today = new Date().toLocaleDateString().split('/')
+            const formatedDay = `${today[1]}/${today[0]}/${today[2]}`
+            const searchTask = state.tasks.filter(x => x.date == formatedDay)
             return searchTask
         },
         getFilteredTasks: (state) =>{
