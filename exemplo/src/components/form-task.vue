@@ -73,8 +73,9 @@ export default {
             if(param){
                 const getTask = this.$store.getters['getAll'].find(x => x._id == param)
                 this.form.title = getTask.title
-                this.form.date = new Date(getTask.date)
-                console.log(this.form.date.toLocaleDateString())
+                //this.form.date = new Date(getTask.date)
+                const getTaskDate = new Date(getTask.date).toLocaleDateString().split('/')
+                this.form.date = `${getTaskDate[2]}-${getTaskDate[1]}-${getTaskDate[0]}`
                 this.form.icon = getTask.icon
                 this.tags = getTask.tags
                 this.form.favorite = getTask.favorite
