@@ -1,15 +1,13 @@
 <template>
     <div class="container">
         <router-view />
-        <BottomMenu />
     </div>
 </template>
 
 <script>
-import BottomMenu from './components/bottom-menu.vue'
+
 export default {
     name: 'App',
-    components: {BottomMenu}
 }
 </script>
 

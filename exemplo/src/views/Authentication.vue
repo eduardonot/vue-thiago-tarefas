@@ -1,0 +1,11 @@
+<template >
+    <router-view />
+</template>
+<script>
+export default {
+    name:'Authentication',
+}
+</script>
+<style >
+    
+</style>

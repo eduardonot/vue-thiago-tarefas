@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        
         path: '/',
         name: 'Home',
         component: () => import('./../views/Home'),
@@ -55,6 +56,23 @@ const routes = [
             },
         ]
     },
+    {
+        path: '/authentication',
+        name: 'Authentication',
+        component: () => import('./../views/Authentication'),
+        children: [
+            {
+                path: '',
+                name: 'login',
+                meta: {
+                    showName: 'Login',
+                },
+                component: () => import('./../Pages/login')
+            }
+        ]
+    },
+    
+
 ]
 
 const router = new VueRouter({

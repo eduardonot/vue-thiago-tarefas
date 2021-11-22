@@ -111,6 +111,10 @@ export default new Vuex.Store({
             API_SERVICE.put(`/task/${data.id}`, data)
             dispatch('load')
         },
+        delTask({dispatch}, data) {
+            API_SERVICE.delete(`/task/${data.id}`, data)
+            dispatch('load')
+        },
         load({ commit }) {
             API_SERVICE.get('/task')
                 .then(response => commit('setTasks', response.data))

@@ -5,7 +5,8 @@
         <input type="text" v-model="tags" placeholder="tags (até duas, separadas por vírgula)">
         <input type="icon" v-model="form.icon" placeholder="icon">
         <input type="checkbox" v-model="form.favorite">
-        <button @click="addTask">Salvar</button>
+        <button @click="submitForm">Salvar</button>
+        <button v-if="getParams" @click="delTask">Excluir</button>
     </div>
 </template>
 <script>
@@ -25,8 +26,13 @@ export default {
     created() {
         this.haveParams()
     },
+    computed: {
+        getParams() {
+            return this.$route.params.id ? true : false
+        }
+    },
     methods: {
-        addTask (){
+        submitForm (){
             const refactDate = this.form.date.split('-')
             const taskDate = `${refactDate[1]}/${refactDate[2]}/${refactDate[0]}`
             let taskTags = new Array
@@ -65,6 +71,10 @@ export default {
             }
             this.clearForm()
             this.$store.dispatch('load')
+        },
+        delTask (){
+            this.$store.dispatch('delTask', {id: this.$route.params.id})
+            this.clearForm()
         },
         trueDate (valor) {
             return Date(valor)
