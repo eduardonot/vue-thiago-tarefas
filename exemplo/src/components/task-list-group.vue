@@ -19,7 +19,7 @@
         },
         computed:{
             getTasks: function(){
-                return this.$store.getters.getFilteredTasks
+                return this.$store.getters['task/getFilteredTasks']
             }
         },
     }

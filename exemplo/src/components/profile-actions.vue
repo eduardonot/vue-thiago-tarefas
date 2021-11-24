@@ -1,13 +1,19 @@
 <template>
     <div class="profile-actions">
         <button class="btn btn-transparent">redefinir senha</button>
-        <button class="btn btn-outline">sair</button>
+        <button @click="logout" class="btn btn-outline">sair</button>
     </div>
 </template>
 
 <script>
     export default {
         name:'profile-actions',
+        methods: {
+            async logout(){
+                await this.$store.dispatch('auth/logout')
+                this.$router.push('/authentication')
+            }
+        },
     }
 </script>
 

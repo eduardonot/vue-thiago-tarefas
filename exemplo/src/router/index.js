@@ -72,7 +72,7 @@ const routes = [
         ]
     },
     
-
+// TODO: Fazer proteção de rotas
 ]
 
 const router = new VueRouter({

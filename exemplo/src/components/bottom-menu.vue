@@ -24,13 +24,13 @@
         components: {NavbarItem},
         methods:{
             allTasks: function(){
-                this.$store.commit('setFilter', 'setAllTasks')
+                this.$store.commit('task/setFilter', 'setAllTasks')
             },
             doneTasks: function(){
-                this.$store.commit('setFilter', 'setDoneTasks')
+                this.$store.commit('task/setFilter', 'setDoneTasks')
             },
             favoriteTasks: function(){
-                this.$store.commit('setFilter', 'setFavoriteTasks')
+                this.$store.commit('task/setFilter', 'setFavoriteTasks')
             },
 
         }

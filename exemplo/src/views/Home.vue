@@ -15,7 +15,7 @@ import BottomMenu from './../components/bottom-menu.vue'
         components: {BottomMenu},
         methods: {
             load() {
-                this.$store.dispatch('load')
+                this.$store.dispatch('task/load')
             }
         },
         

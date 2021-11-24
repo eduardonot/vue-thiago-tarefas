@@ -3,9 +3,10 @@
         <Card class="login-card" color="rgba(255, 255, 255, 0.15)">
             <div class="form" slot="content">
                 <h1>{{ title }}</h1>
-                <input type="text" placeholder="LOGIN">
-                <input type="password" placeholder="Senha">
-                <button >entrar</button>
+                <input v-model="form.email" type="text" placeholder="LOGIN">
+                <input v-model="form.pass1" type="password" placeholder="Senha">
+                <button @click="submitLogin" >entrar</button>
+                <p>{{ getLoginStatus }}</p>
             </div>
         </Card>
     </div>
@@ -18,9 +19,24 @@ export default {
     components: {Card},
     data() {
             return {
+                form: {
+                    email: '',
+                    pass1: ''
+                },
                 title: this.$route.meta.showName
             }
         },
+    methods: {
+        async submitLogin () {
+            await this.$store.dispatch('auth/login', this.form)
+            this.$router.push('/dashboard')
+        }
+    },
+    computed: {
+        getLoginStatus () {
+            return this.$store.getters.getLoginRequestStatus
+        }
+        }
 }
 </script>
 
@@ -34,7 +50,7 @@ export default {
     }
 
     .login-card {
-        width: 80%;
+        width: 50%;
     }
 
     .form{
@@ -68,10 +84,16 @@ export default {
         margin: 0;
         width: 100%;
         padding: 20px 5px 20px 5px;
-        margin: 10px 0px 10px 0px;
+        margin: 10px 0px 0px 0px;
         text-transform: uppercase;
         background-color: rgba(255, 255, 255, 0.0);
         color: white;
         border: 1px solid white;
+    }
+
+    @media screen and (max-width: 767px) {
+        .login-card {
+            width: 100%;
+        }
     }
 </style>

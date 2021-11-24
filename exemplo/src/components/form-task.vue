@@ -50,7 +50,7 @@ export default {
             })
             // EDITAR
             if(this.$route.params.id){
-                this.$store.dispatch('editTask', {
+                this.$store.dispatch('task/editTask', {
                     id: this.$route.params.id,
                     title: this.form.title,
                     date: taskDate,
@@ -61,7 +61,7 @@ export default {
         
             // ADICIONAR
             } else {
-                this.$store.dispatch('addTask', {
+                this.$store.dispatch('task/addTask', {
                     title: this.form.title,
                     date: taskDate,
                     tags: taskTags,
@@ -70,10 +70,10 @@ export default {
                 })
             }
             this.clearForm()
-            this.$store.dispatch('load')
+            this.$store.dispatch('task/load')
         },
         delTask (){
-            this.$store.dispatch('delTask', {id: this.$route.params.id})
+            this.$store.dispatch('task/delTask', {id: this.$route.params.id})
             this.clearForm()
         },
         trueDate (valor) {
@@ -82,7 +82,7 @@ export default {
         haveParams () {
             const param = this.$route.params.id
             if(param){
-                const getTask = this.$store.getters['getAll'].find(x => x._id == param)
+                const getTask = this.$store.getters['task/getAll'].find(x => x._id == param)
                 this.form.title = getTask.title
                 //this.form.date = new Date(getTask.date)
                 const getTaskDate = new Date(getTask.date).toLocaleDateString().split('/')
