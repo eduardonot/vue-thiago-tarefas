@@ -71,6 +71,7 @@ export default {
             dispatch('load')
         },
         load({ commit }) {
+            
             API_SERVICE.get('/task')
                 .then(response => commit('setTasks', response.data))
                 .then(() => commit('setFilter', 'setAllTasks'))

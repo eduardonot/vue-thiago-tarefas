@@ -2,8 +2,9 @@ import { API_SERVICE } from './../plugins/api'
 
 export default {
     state: {
-        user: null,
-        token: null,
+        loginRequestStatus: '',
+        user: '',
+        token: '',
     },
     mutations: {
         setLogin: (state, payload) => {
@@ -21,11 +22,11 @@ export default {
         }
     },
     actions: {
-        login: async ({ commit }, payload) => {
+        login: async ({ commit, state }, payload) => {
             await API_SERVICE.post('login', payload)
                 .then(response => commit('setLogin', response.data))
                 .catch(error => {
-                    alert('Dados incorretos')
+                    state.loginRequestStatus = 'Usuário ou Senha inválidos'
                     throw new Error(error)
                 })
         },
@@ -39,6 +40,9 @@ export default {
         },
         token: (state) => {
             return state.token ? true : false
+        },
+        getLoginRequestStatus: (state) => {
+            return state.loginRequestStatus
         }
     },
     namespaced: true

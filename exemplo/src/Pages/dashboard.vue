@@ -24,6 +24,7 @@
             Input,
         },
         created() {
+            this.$store.commit('task/reset')
             this.load()
         },
         methods: {

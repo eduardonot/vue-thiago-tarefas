@@ -12,6 +12,7 @@
             async logout(){
                 await this.$store.dispatch('auth/logout')
                 this.$router.push('/authentication')
+                
             }
         },
     }

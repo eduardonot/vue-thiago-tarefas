@@ -9,7 +9,7 @@
 import BottomMenu from './../components/bottom-menu.vue'
     export default {
         name: 'Home',
-        components: {BottomMenu}
+        components: {BottomMenu},
     }
 </script>
 

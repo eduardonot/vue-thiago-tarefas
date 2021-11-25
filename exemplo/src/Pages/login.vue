@@ -34,7 +34,7 @@ export default {
     },
     computed: {
         getLoginStatus () {
-            return this.$store.getters.getLoginRequestStatus
+            return this.$store.getters['auth/getLoginRequestStatus']
         }
         }
 }
