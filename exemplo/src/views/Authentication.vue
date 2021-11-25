@@ -6,6 +6,9 @@
 <script>
 export default {
     name:'Authentication',
+    created () {
+        this.$store.commit('task/reset')
+    }
 }
 </script>
 <style >

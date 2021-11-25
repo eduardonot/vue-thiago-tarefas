@@ -23,6 +23,14 @@
             TaskListGroup,
             Input,
         },
+        created() {
+            this.load()
+        },
+        methods: {
+            load() {
+                this.$store.dispatch('task/load')
+            }
+        },
     }
 </script>
 

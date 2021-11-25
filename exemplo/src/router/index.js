@@ -7,7 +7,7 @@ const routes = [
     {
         
         path: '/',
-        name: 'Home',
+        name: '',
         component: () => import('./../views/Home'),
         children: [
             {
@@ -58,7 +58,7 @@ const routes = [
     },
     {
         path: '/authentication',
-        name: 'Authentication',
+        name: '',
         component: () => import('./../views/Authentication'),
         children: [
             {

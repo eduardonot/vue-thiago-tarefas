@@ -4,55 +4,14 @@ export default {
     state: {
         filteredTasksTitle: '',
         filteredTasks:[],
-        tasks:[
-            // {
-            //     id: 1,
-            //     title: 'Primeira Tarefa',
-            //     date: '2021-10-20',
-            //     tags: ['Namorada'],
-            //     icon: 'favorite_border',
-            //     status: false,
-            //     favorite: false
-            // },
-            // {
-            //     id: 2,
-            //     title: 'Segunda Tarefa',
-            //     date: '2021-03-03',
-            //     tags: ['Compras', 'Importante'],
-            //     icon: 'shopping_cart',
-            //     status: false,
-            //     favorite: false
-            // },
-            // {
-            //     id: 3,
-            //     title: 'Terceira Tarefa',
-            //     date: '2021-05-12',
-            //     tags: ['Compras', 'Importante'],
-            //     icon: 'shopping_cart',
-            //     status: true,
-            //     favorite: true
-            // },
-            // {
-            //     id: 4,
-            //     title: 'Quarta',
-            //     date: '2021-03-11',
-            //     tags: ['Compras', 'Importante'],
-            //     icon: 'shopping_cart',
-            //     status: true,
-            //     favorite: true
-            // },
-            // {
-            //     id: 5,
-            //     title: '5ª',
-            //     date: '2021-11-03',
-            //     tags: ['Compras', 'Importante'],
-            //     icon: 'shopping_cart',
-            //     status: true,
-            //     favorite: true
-            // },
-        ],
+        tasks:[],
     },
     mutations: {
+        reset: (state) => {
+            state.tasks = []
+            state.filteredTasksTitle = ''
+            state.filteredTasks = []
+        },
         setFilter: (state, payload) => {
             const today = new Date().toLocaleDateString().split('/')
             const formatedDay = `${today[1]}/${today[0]}/${today[2]}`

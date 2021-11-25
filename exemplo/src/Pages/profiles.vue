@@ -1,7 +1,7 @@
 <template>
     <div class="profile-container">
         <h1>{{ title }}</h1>
-        <profile-bio />
+        <profile-bio :name="user.name" :email="user.email" :picture="user.picture"/>
         <profile-actions class="prof-actions"/>
     </div>
 </template>
@@ -14,6 +14,11 @@ import ProfileBio from '../components/profile-bio.vue'
         data() {
             return {
                 title: this.$route.meta.showName
+            }
+        },
+        computed: {
+            user () {
+                return this.$store.getters['auth/user']
             }
         },
         components: {ProfileBio, ProfileActions},

@@ -9,16 +9,7 @@
 import BottomMenu from './../components/bottom-menu.vue'
     export default {
         name: 'Home',
-        created() {
-            this.load()
-        },
-        components: {BottomMenu},
-        methods: {
-            load() {
-                this.$store.dispatch('task/load')
-            }
-        },
-        
+        components: {BottomMenu}
     }
 </script>
 
