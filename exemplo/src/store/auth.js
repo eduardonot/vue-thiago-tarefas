@@ -3,8 +3,8 @@ import { API_SERVICE } from './../plugins/api'
 export default {
     state: {
         loginRequestStatus: '',
-        user: '',
-        token: '',
+        user: null,
+        token: null,
     },
     mutations: {
         setLogin: (state, payload) => {
@@ -16,9 +16,14 @@ export default {
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
         },
-        setLogout: () => {
+        setLogout: (state) => {
+            state.user = null
+            state.token = null
             localStorage.removeItem('token')
             localStorage.removeItem('user')
+        },
+        setUser: (state) => {
+            state.user = JSON.parse(localStorage.getItem('user'))
         }
     },
     actions: {

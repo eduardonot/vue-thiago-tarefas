@@ -70,6 +70,10 @@ export default {
             API_SERVICE.delete(`/task/${data.id}`, data)
             dispatch('load')
         },
+        changeTaskStatus({ dispatch }, data){
+            API_SERVICE.put(`/task/${data.id}`, {status: data.status})
+            dispatch('load')
+        },
         load({ commit }) {
             
             API_SERVICE.get('/task')

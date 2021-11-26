@@ -4,8 +4,13 @@
         <input type="date" v-model="form.date" pattern="\d{4}-\d{2}-\d{2}" min="2021-01-01" max="2100-01-01">
         <input type="text" v-model="tags" placeholder="tags (até duas, separadas por vírgula)">
         <input type="icon" v-model="form.icon" placeholder="icon">
-        <input type="checkbox" v-model="form.favorite">
+        <div class="set-favorite">
+            <h3>Definir como favorita</h3>
+            <input type="checkbox" v-model="form.favorite">
+        </div>
         <button @click="submitForm">Salvar</button>
+        <button v-if="getParams && form.status === false" @click="setDone">Definir como Concluída</button>
+        <button v-if="getParams && form.status === true" @click="setUndone">Definir como Não Concluída</button>
         <button v-if="getParams" @click="delTask">Excluir</button>
     </div>
 </template>
@@ -19,6 +24,7 @@ export default {
                 title: '',
                 date: '',
                 icon: '',
+                status: false,
                 favorite: false
             }
         }
@@ -76,6 +82,18 @@ export default {
             this.$store.dispatch('task/delTask', {id: this.$route.params.id})
             this.clearForm()
         },
+        setDone (){
+            this.$store.dispatch('task/changeTaskStatus', {
+                id: this.$route.params.id,
+                status: true
+            })
+        },
+        setUndone (){
+            this.$store.dispatch('task/changeTaskStatus', {
+                id: this.$route.params.id,
+                status: false
+            })
+        },
         trueDate (valor) {
             return Date(valor)
         },
@@ -90,6 +108,7 @@ export default {
                 this.form.icon = getTask.icon
                 this.tags = getTask.tags
                 this.form.favorite = getTask.favorite
+                this.form.status = getTask.status
             }
         },
         clearForm () {
@@ -110,9 +129,27 @@ export default {
         color:white;
     }
 
+    .form{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        color:white;
+        justify-content: center;
+        align-items: center;
+    }
+
     .form > input {
-        padding: 5px;
+        box-sizing: border-box;
+        width: 100%;
+        border: none;
+        padding: 10px 5px 10px 5px;
         font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .form > input:focus {
+        outline: none;
     }
 
     .form > input::placeholder {
@@ -120,7 +157,28 @@ export default {
     }
 
     .form > button {
-        padding: 5px;
+        margin: 0;
+        width: 100%;
+        padding: 20px 5px 20px 5px;
+        margin: 10px 0px 0px 0px;
         text-transform: uppercase;
+        background-color: rgba(255, 255, 255, 0.0);
+        color: white;
+        border: 1px solid white;
+    }
+    
+    .set-favorite{
+        width: 100%;
+        padding: 0 15px 0 15px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .set-favorite > input[type="checkbox"]{
+        width: 20px;
+        height: 20px;
     }
 </style>

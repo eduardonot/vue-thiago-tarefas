@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="/task-form/+item._id" class="task-item-container">
+    <router-link :to="/app/+'task-form/'+item._id" class="task-item-container">
         <h1>{{ item.title }}</h1>
         <p>{{ item.date }}</p>
         <div class="chip-list">

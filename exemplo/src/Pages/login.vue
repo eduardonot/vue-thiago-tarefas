@@ -29,7 +29,7 @@ export default {
     methods: {
         async submitLogin () {
             await this.$store.dispatch('auth/login', this.form)
-            this.$router.push('/dashboard')
+            await this.$router.push({name: 'dashboard'})
         }
     },
     computed: {

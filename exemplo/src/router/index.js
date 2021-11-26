@@ -6,8 +6,7 @@ Vue.use(VueRouter)
 const routes = [
     {
         
-        path: '/',
-        name: '',
+        path: '/app',
         component: () => import('./../views/Home'),
         children: [
             {
@@ -58,7 +57,6 @@ const routes = [
     },
     {
         path: '/authentication',
-        name: '',
         component: () => import('./../views/Authentication'),
         children: [
             {
@@ -75,8 +73,16 @@ const routes = [
 // TODO: Fazer proteção de rotas
 ]
 
-const router = new VueRouter({
+const Router = new VueRouter({
     routes
 })
 
-export default router
+
+const isAuthenticated = localStorage.getItem('token')
+
+Router.beforeEach((to, from, next) => {
+    if (to.name !== 'login' && !isAuthenticated) next({ name: 'login' })
+    else next()
+})
+
+export default Router

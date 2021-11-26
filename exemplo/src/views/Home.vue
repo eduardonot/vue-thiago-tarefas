@@ -10,7 +10,10 @@ import BottomMenu from './../components/bottom-menu.vue'
     export default {
         name: 'Home',
         components: {BottomMenu},
-    }
+        created(){
+            this.$store.commit('auth/setUser')
+        }
+    } 
 </script>
 
 <style>
