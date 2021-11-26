@@ -1,28 +1,31 @@
 <template >
-    <div class="login-container">
-        <Card class="login-card" color="rgba(255, 255, 255, 0.15)">
+    <div class="register-container">
+        <Card class="register-card" color="rgba(255, 255, 255, 0.15)">
             <div class="form" slot="content">
                 <h1>{{ title }}</h1>
-                <input v-model="form.email" type="text" placeholder="LOGIN">
-                <input v-model="form.pass1" type="password" placeholder="Senha">
-                <button @click="submitLogin" >entrar</button>
-                <p>{{ getLoginStatus }}</p>
+                <input v-model="form.name" type="text" placeholder="INSIRA SEU NOME">
+                <input v-model="form.email" type="text" placeholder="INSIRA SEU EMAIL">
+                <input v-model="form.pass1" type="password" placeholder="digite sua senha">
+                <input v-model="form.pass2" type="password" placeholder="digite a senha novamente">
+                <button @click="submitLogin" >Cadastrar</button>
             </div>
         </Card>
-        <router-link :to="{name: 'register'}" class="borderless">Não é cadastrado? Clique e cadastre-se agora</router-link>
+        <router-link :to="{name: 'login'}" class="borderless">Já é cadastrado? Clique aqui para fazer o login</router-link>
     </div>
 </template>
 
 <script>
 import Card from './../components/card.vue'
 export default {
-    name: 'login',
+    name: 'register',
     components: {Card},
     data() {
         return {
             form: {
+                name: '',
                 email: '',
-                pass1: ''
+                pass1: '',
+                pass2: '',
             },
             title: this.$route.meta.showName
         }
@@ -45,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-    .login-container {
+    .register-container {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
@@ -56,7 +59,7 @@ export default {
         align-items: center;
     }
 
-    .login-card {
+    .register-card {
         width: 50%;
         box-sizing: border-box;
         margin-bottom: 10px;
@@ -104,13 +107,8 @@ export default {
         border: 1px solid white;
     }
 
-    .bottom-content > button {
-        width: 100%;
-        padding: 10px 0px 10px 0px;
-        background-color: rgba(255, 255, 255, 0.0);
-        border: none;
-        color: white;
-        font-weight: 500;
+    .form > a {
+        text-decoration: none;
     }
 
     .borderless {
@@ -131,7 +129,7 @@ export default {
     }
 
     @media screen and (max-width: 767px) {
-        .login-card {
+        .register-card {
             width: 100%;
         }
     }

@@ -44,8 +44,8 @@
 
     .btn-outline{
         background-color: transparent;
-        border: solid 2px #985EFF;
+        border: 1px solid white;
         border-radius: 5px;
-        color: #985EFF;
+        color: white;
     }
 </style>

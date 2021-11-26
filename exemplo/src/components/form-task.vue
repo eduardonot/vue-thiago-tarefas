@@ -180,5 +180,6 @@ export default {
     .set-favorite > input[type="checkbox"]{
         width: 20px;
         height: 20px;
+        background-color: red;
     }
 </style>

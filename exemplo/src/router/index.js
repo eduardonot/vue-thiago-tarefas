@@ -9,10 +9,10 @@ const routes = [
         path: '/app',
         component: () => import('./../views/Home'),
         children: [
-            {
-                path: '',
-                redirect: 'dashboard'
-            },
+            // {
+            //     path: '',
+            //     redirect: 'dashboard'
+            // },
             {
                 path: 'dashboard',
                 name: 'dashboard',
@@ -69,6 +69,14 @@ const routes = [
             }
         ]
     },
+    {
+        path: '/register',
+        name: 'register',
+        component: () => import('./../Pages/register'),
+        meta: {
+            showName: 'Cadastro'
+        }
+    }
     
 // TODO: Fazer proteção de rotas
 ]
@@ -77,12 +85,14 @@ const Router = new VueRouter({
     routes
 })
 
-
-const isAuthenticated = localStorage.getItem('token')
-
 Router.beforeEach((to, from, next) => {
-    if (to.name !== 'login' && !isAuthenticated) next({ name: 'login' })
-    else next()
+    const isAuthenticated = localStorage.getItem('token')
+    if (to.name !== 'login' && to.name !== 'register') {
+        if (!isAuthenticated){
+            next({ name: 'login' })
+        }
+    }
+    next()
 })
 
 export default Router

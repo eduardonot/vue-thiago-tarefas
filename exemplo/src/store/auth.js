@@ -17,13 +17,16 @@ export default {
             localStorage.setItem('user', JSON.stringify(user))
         },
         setLogout: (state) => {
-            state.user = null
+            state.user = ''
             state.token = null
             localStorage.removeItem('token')
             localStorage.removeItem('user')
         },
         setUser: (state) => {
             state.user = JSON.parse(localStorage.getItem('user'))
+        },
+        setLoginRequestStatus: (state, payload) => {
+            state.loginRequestStatus = payload
         }
     },
     actions: {
