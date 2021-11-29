@@ -7,7 +7,8 @@
                 <input v-model="form.email" type="text" placeholder="INSIRA SEU EMAIL">
                 <input v-model="form.pass1" type="password" placeholder="digite sua senha">
                 <input v-model="form.pass2" type="password" placeholder="digite a senha novamente">
-                <button @click="submitLogin" >Cadastrar</button>
+                <button @click="signup" >Cadastrar</button>
+                <p v-for="data in getSignupStatus" :key="data.id">{{ data }}</p>
             </div>
         </Card>
         <router-link :to="{name: 'login'}" class="borderless">Já é cadastrado? Clique aqui para fazer o login</router-link>
@@ -34,13 +35,13 @@ export default {
         this.$store.commit('auth/setLoginRequestStatus', '')
     },
     methods: {
-        async submitLogin () {
-            await this.$store.dispatch('auth/login', this.form)
-            await this.$router.push({name: 'dashboard'})
+        async signup () {
+            await this.$store.dispatch('auth/signup', this.form)
+            await this.$router.push({name: 'login'})
         }
     },
     computed: {
-        getLoginStatus () {
+        getSignupStatus () {
             return this.$store.getters['auth/getLoginRequestStatus']
         }
     }
@@ -76,7 +77,7 @@ export default {
     }
 
     .form > p{
-        margin: 20px 0px 10px 0px;
+        margin: 5px 0px 10px 0px;
     }
 
     .form > input {

@@ -3,7 +3,13 @@
         <input type="text" v-model="form.title" placeholder="título">
         <input type="date" v-model="form.date" pattern="\d{4}-\d{2}-\d{2}" min="2021-01-01" max="2100-01-01">
         <input type="text" v-model="tags" placeholder="tags (até duas, separadas por vírgula)">
-        <input type="icon" v-model="form.icon" placeholder="icon">
+        <!-- <input type="icon" v-model="form.icon" placeholder="icon"> -->
+        <div class="dropdown">
+            <select v-model="form.icon"  onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;"  class="form-options">
+                <option selected="selected" disabled>Selecione</option>
+                <option v-for="option in this.options" :key="option.id" :value="option.name" >{{ option.display }}</option>
+            </select>
+        </div>
         <div class="set-favorite">
             <h3>Definir como favorita</h3>
             <input type="checkbox" v-model="form.favorite">
@@ -20,10 +26,36 @@ export default {
     data() {
         return {
             tags: '',
+            options: [
+                {name: 'fitness_center', display: 'Academia'},
+                {name: 'help', display: 'Ajuda'},
+                {name: 'warning', display: 'Alerta'},
+                {name: 'cake', display: 'Aniversário'},
+                {name: 'assured_workload', display: 'Banco'},
+                {name: 'home', display: 'Casa'},
+                {name: 'shopping_cart', display: 'Compras'},
+                {name: 'favorite', display: 'Coração'},
+                {name: 'paid', display: 'Dinheiro'},
+                {name: 'email', display: 'Email'},
+                {name: 'emoji_events', display: 'Esportes'},
+                {name: 'auto_stories', display: 'Estudos'},
+                {name: 'celebration', display: 'Festa'},
+                {name: 'child_care', display: 'Filhos'},
+                {name: 'groups', display: 'Grupo'},
+                {name: 'call', display: 'Ligação'},
+                {name: 'medical_services', display: 'Médico'},
+                {name: 'notifications', display: 'Notificação'},
+                {name: 'display', display: 'Procurar'},
+                {name: 'schedule', display: 'Relógio'},
+                {name: 'work', display: 'Trabalho'},
+                {name: 'live_tv', display: 'TV'},
+                {name: 'sports_esports', display: 'Videogame'},
+                {name: 'error', display: 'Outros'}
+            ],
             form:{
                 title: '',
                 date: '',
-                icon: '',
+                icon: 'Selecione',
                 status: false,
                 favorite: false
             }
@@ -38,7 +70,10 @@ export default {
         }
     },
     methods: {
-        submitForm (){
+        async submitForm (){
+            if(!this.form.title || !this.form.date || this.form.icon == 'Selecione'){
+                return alert('Preencha o formuário')
+            }
             const refactDate = this.form.date.split('-')
             const taskDate = `${refactDate[1]}/${refactDate[2]}/${refactDate[0]}`
             let taskTags = new Array
@@ -56,7 +91,7 @@ export default {
             })
             // EDITAR
             if(this.$route.params.id){
-                this.$store.dispatch('task/editTask', {
+                await this.$store.dispatch('task/editTask', {
                     id: this.$route.params.id,
                     title: this.form.title,
                     date: taskDate,
@@ -64,6 +99,7 @@ export default {
                     icon: this.form.icon,
                     favorite: this.form.favorite
                 })
+                await this.$router.push({name: 'dashboard'})
         
             // ADICIONAR
             } else {
@@ -74,25 +110,29 @@ export default {
                     icon: this.form.icon,
                     favorite: this.form.favorite
                 })
+                await this.$router.push({name: 'dashboard'})
             }
             this.clearForm()
             this.$store.dispatch('task/load')
         },
-        delTask (){
-            this.$store.dispatch('task/delTask', {id: this.$route.params.id})
+        async delTask (){
+            await this.$store.dispatch('task/delTask', {id: this.$route.params.id})
             this.clearForm()
+            await this.$router.push({name: 'dashboard'})
         },
-        setDone (){
-            this.$store.dispatch('task/changeTaskStatus', {
+        async setDone (){
+            await this.$store.dispatch('task/changeTaskStatus', {
                 id: this.$route.params.id,
                 status: true
             })
+            await this.$router.push({name: 'dashboard'})
         },
-        setUndone (){
-            this.$store.dispatch('task/changeTaskStatus', {
+        async setUndone (){
+            await this.$store.dispatch('task/changeTaskStatus', {
                 id: this.$route.params.id,
                 status: false
             })
+            await this.$router.push({name: 'dashboard'})
         },
         trueDate (valor) {
             return Date(valor)
@@ -166,7 +206,28 @@ export default {
         color: white;
         border: 1px solid white;
     }
+
+    .dropdown{
+        box-sizing: border-box;
+        width: 100%;
+    }
     
+    .form-options{
+        box-sizing: border-box;
+        border-radius: 2px;
+        width: 100%;
+        border: none;
+        padding: 10px 5px 10px 5px;
+        font-size: 1rem;
+    }
+
+    .form-options > option {
+        font-size: 1rem;
+        padding: 10px 0px 10px 0px;
+        box-shadow: border-box;
+        border-top: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
     .set-favorite{
         width: 100%;
         padding: 0 15px 0 15px;

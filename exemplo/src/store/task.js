@@ -60,19 +60,19 @@ export default {
     actions: {
         addTask ({dispatch}, payload) {
             API_SERVICE.post('/task', payload)
-            dispatch('load')
+                .then(()=> dispatch('load'))
         },
         editTask ({dispatch}, data) {
             API_SERVICE.put(`/task/${data.id}`, data)
-            dispatch('load')
+                .then(()=> dispatch('load'))
         },
         delTask({dispatch}, data) {
             API_SERVICE.delete(`/task/${data.id}`, data)
-            dispatch('load')
+                .then(()=> dispatch('load'))
         },
         changeTaskStatus({ dispatch }, data){
             API_SERVICE.put(`/task/${data.id}`, {status: data.status})
-            dispatch('load')
+                .then(()=> dispatch('load'))
         },
         load({ commit }) {
             

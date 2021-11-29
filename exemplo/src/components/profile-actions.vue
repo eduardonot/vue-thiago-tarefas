@@ -1,6 +1,6 @@
 <template>
     <div class="profile-actions">
-        <button class="btn btn-transparent">redefinir senha</button>
+        <button class="btn btn-transparent">editar perfil</button>
         <button @click="logout" class="btn btn-outline">sair</button>
     </div>
 </template>

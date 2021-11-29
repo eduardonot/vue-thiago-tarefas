@@ -38,6 +38,15 @@ export default {
                     throw new Error(error)
                 })
         },
+        signup: async ({commit, state}, payload) => {
+            await API_SERVICE.post('user', payload)
+                .then(() => commit('setLoginRequestStatus', 'Cadastrado!'))
+                .catch( error => {
+                    const errorResponse = {error}
+                    state.loginRequestStatus = errorResponse.error.response.data
+                    throw new Error(error)
+                })
+        },
         logout: async ({ commit }) => {
             await commit('setLogout')
         }

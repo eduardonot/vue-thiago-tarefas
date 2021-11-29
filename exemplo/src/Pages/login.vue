@@ -1,7 +1,7 @@
 <template >
     <div class="login-container">
         <Card class="login-card" color="rgba(255, 255, 255, 0.15)">
-            <div class="form" slot="content">
+            <div class="form" slot="content" @keyup.enter="submitLogin">
                 <h1>{{ title }}</h1>
                 <input v-model="form.email" type="text" placeholder="LOGIN">
                 <input v-model="form.pass1" type="password" placeholder="Senha">
